@@ -14,12 +14,14 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class,args);        
 	}
-	@GetMapping
-	public List<Sklad> getSklad(){
-		return List.of( new Sklad(
-				   1,
-		                "Tovar 1",
-				    25)
-				);
-	}
+
+	// @GetMapping
+	// public List<Sklad> getSklad(){
+	// 	return List.of( new Sklad(
+	// 			   1,
+	// 	                "Tovar 1",
+	// 			    25)
+	// 			);
+	// }
+	
 }
