@@ -1,4 +1,4 @@
-package com.example.demo.skladconnection;
+package com.example.demo.db.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +10,7 @@ public class SkladJdbc {
       public SkladJdbc(){
             showValueFromDatabaseTableSklad();
       }
-      public static void main(String[] args) {
-            new SkladJdbc();
-      }
+    
       public static void showValueFromDatabaseTableSklad(){
             try {
                   Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sklad", "root", "show_pussy8squirrel~hairy");
