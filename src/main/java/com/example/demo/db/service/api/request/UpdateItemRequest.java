@@ -11,31 +11,19 @@ public class UpdateItemRequest {
       private String description;
       @NonNull
       private int available;
-      /**
-       * @param name
-       * @param description
-       * @param available
-       */
+
       public UpdateItemRequest(String name, String description, int available) {
             this.name = name;
             this.description = description;
             this.available = available;
       }
-      /**
-       * @return the name
-       */
+
       public String getName() {
             return name;
       }
-      /**
-       * @return the description
-       */
       public String getDescription() {
             return description;
       }
-      /**
-       * @return the available
-       */
       public int getAvailable() {
             return available;
       }

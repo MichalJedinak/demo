@@ -41,6 +41,7 @@ public class ItemServiceImpl implements ItemService{
             itemRepository.update(id,request);
       }
 
+      ////  požiť neskôr  v rozšírení projketu
       @Override
       public void updateAvailableInternal(int id, int available) {
              itemRepository.updateAvailableInternal(id,available);
