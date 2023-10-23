@@ -8,11 +8,11 @@ public class UpdateItemRequest {
       @NonNull
       private String name;
       @NonNull
-      private String description;
-      @NonNull
       private int available;
+      @NonNull
+      private String description;
 
-      public UpdateItemRequest(String name, String description, int available) {
+      public UpdateItemRequest(String name,  int available,String description) {
             this.name = name;
             this.description = description;
             this.available = available;
@@ -40,6 +40,10 @@ public class UpdateItemRequest {
             UpdateItemRequest other = (UpdateItemRequest) obj;
             return Objects.equals(name, other.name) && Objects.equals(description, other.description)
                         && available == other.available;
+      }
+
+      public Object setAvailable(int available2) {
+            return null;
       }
       
 }

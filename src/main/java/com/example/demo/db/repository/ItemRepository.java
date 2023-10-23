@@ -49,7 +49,7 @@ public class ItemRepository {
             jdbcTemplate.query(query, itemRowMapper);
       }
 
-      public Integer add(Item item){
+      public  Integer add(Item item){
             final String query = "INSERT INTO item (name,available,description,created_at)VALUE(?,?,?,?);";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(new PreparedStatementCreator() {
