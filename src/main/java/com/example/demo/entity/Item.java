@@ -9,17 +9,17 @@ import jakarta.annotation.Nonnull;
 
 public class Item {
       @Nullable
-      private Long   id;
+      private Integer  id;
       @Nonnull
       private String name;
       @Nonnull
       private int available;
      @Nonnull
       private String description;
-      @Nullable
+      @Nonnull
       Timestamp createdAt;
 
-      public Item(Long id, String name, Timestamp createdAt, int available,String description) {
+      public Item(Integer id, String name, Timestamp createdAt, int available,String description) {
             this.id = id;
             this.name = name;
             this.createdAt = Timestamp.from(Instant.now());
@@ -30,10 +30,10 @@ public class Item {
       public Item() {
       }
       @Nullable
-      public Long getId() {
+      public Integer getId() {
             return id;
       }
-      public void setId(@Nullable Long id) {
+      public void setId(@Nullable Integer id) {
             this.id = id;
       }
       public String getName() {

@@ -18,7 +18,7 @@ import com.example.demo.db.service.api.request.UpdateItemRequest;
 import com.example.demo.entity.Item;
 
 @RestController 
-@RequestMapping("warehouse")
+@RequestMapping("item")
 public class ItemController {
 
       ItemService itemService;
@@ -32,11 +32,11 @@ public class ItemController {
       //       Sklad sklad = new Sklad("", 20);
       //       return sklad;
       // }
-      @RequestMapping("/index")
-      public String index(){
-            String s = "Moja prvá Srping Aplikácia";
-            return s;
-      }
+      // @RequestMapping("/index")
+      // public String index(){
+      //       String s = "Moja prvá Srping Aplikácia";
+      //       return s;
+      // }
 
       @PostMapping
       public ResponseEntity add(@RequestBody Item item){

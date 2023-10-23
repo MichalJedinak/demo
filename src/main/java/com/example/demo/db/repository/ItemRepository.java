@@ -3,6 +3,9 @@ package com.example.demo.db.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -53,30 +56,33 @@ public class ItemRepository {
 
                   @Override
                   public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                        PreparedStatement preparedStatement = con.prepareStatement(query);
+                        PreparedStatement preparedStatement = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
                         preparedStatement.setString(1, item.getName());
                         preparedStatement.setInt(2,item.getAvailable());
                         preparedStatement.setString(3, item.getDescription());
+                        if(item.getCreatedAt()==null){
+                              item.setCreatedAt(Timestamp.from(Instant.now()));
+                        }
                         preparedStatement.setTimestamp(4,item.getCreatedAt());
                         return preparedStatement;
                   }
                   
             },keyHolder);
-
-            if(keyHolder.getKey()!=null){
-                  return keyHolder.getKey().intValue();
+            Number generatedKey = keyHolder.getKey();
+            if(generatedKey!=null){
+                  return generatedKey.intValue();
             }else{
                   return null;
             }
 
       }
       public void delete(int id){
-            final String qeury = "DELETE FROM item WHERE id="+id+";";
+            final String qeury = "DELETE FROM item WHERE id=?;";
             jdbcTemplate.update(qeury, id);
       }
       public void update(int id,UpdateItemRequest updateItemRequest){
-            final String sql="UPDATE item SET name=? available=? description=? WHERE id="+id+";";
-            jdbcTemplate.update(sql,updateItemRequest);
+            final String sql="UPDATE item SET name=? , available=? , description=? WHERE id=?;";
+            jdbcTemplate.update(sql,updateItemRequest.getName(),updateItemRequest.getAvailable(),updateItemRequest.getDescription(),id);
       }
       public void updateAvailableInternal(int id, int available){
             final String sql = "UPDATE item SET available=? WHERE id=?;";
