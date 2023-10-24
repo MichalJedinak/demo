@@ -1,15 +1,20 @@
 package com.example.demo.db.service.api.request;
 
 import java.util.Objects;
-import io.micrometer.common.lang.NonNull;
 
 public class UpdateItemRequest {
-      @NonNull
+     
       private String name;
-      @NonNull
+      
       private int available;
-      @NonNull
+      
       private String description;
+
+      {
+            name = "defaultName";
+            available = 0;
+            description = "defaultDescription";
+        }
 
       public UpdateItemRequest(String name,  int available,String description) {
             this.name = name;

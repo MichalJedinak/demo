@@ -5,7 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.db.repository.ItemRepository;
 import com.example.demo.db.service.api.request.UpdateItemRequest;
@@ -24,16 +24,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-@RestController
+@Component
 public class WarehouseRest  extends JFrame implements ActionListener{
-
+       private UpdateItemRequest request;
       private  ItemRepository itemRepository;
-      private UpdateItemRequest request;
 
       @Autowired
-      public WarehouseRest(ItemRepository itemRepository,UpdateItemRequest request){
+      public WarehouseRest(ItemRepository itemRepository){
             this.itemRepository=itemRepository;
-            this.request = request;
+             this.request = createUpdateItemRequest("defaultName", 0, "defaultDescription");
       }
     
       JMenuBar bar = new JMenuBar();
@@ -361,6 +360,10 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   JOptionPane.showMessageDialog(null,e, "Upozornenie",JOptionPane.ERROR_MESSAGE);
             }
       }
+
+       public UpdateItemRequest createUpdateItemRequest(String name,int available,String desription){
+                  return new UpdateItemRequest(name, available, desription);
+       };
       public static void main(String[] args) {
           /////////// 
             try {
