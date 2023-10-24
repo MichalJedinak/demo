@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.example.demo.db.repository.ItemRepository;
 import com.example.demo.db.service.api.request.UpdateItemRequest;
+import com.example.demo.db.service.impl.ItemServiceImpl;
 import com.example.demo.entity.Item;
 
 import net.miginfocom.swing.MigLayout;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class WarehouseRest  extends JFrame implements ActionListener{
 
+      private ItemServiceImpl impl;
       private  ItemRepository itemRepository;
       private UpdateItemRequest request;
       public WarehouseRest(ItemRepository itemRepository,UpdateItemRequest request){
@@ -73,6 +75,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
       private String password = "show_pussy8squirrel~hairy";
       
       public WarehouseRest(){
+
             descArea.setPreferredSize(new Dimension(120, 190));
             pane.setPreferredSize(new Dimension(400, 250));
             pane.setLayout(new ScrollPaneLayout());
@@ -235,7 +238,6 @@ public class WarehouseRest  extends JFrame implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent e) {
             
-            
             if(e.getSource()==item_1){
                   for(JTextField field :filedList){
                         field.setText("");                    
@@ -312,18 +314,19 @@ public class WarehouseRest  extends JFrame implements ActionListener{
       }
 
       public void dataHandlingGuiApiAddItem(){
-             try {
                   Item newItem = new Item();
+             try {
                   String s = field_3.getText();
                   int available =Integer.parseInt(s) ;
                   newItem.setName(field_2.getText());
                   newItem.setAvailable(available);
                   newItem.setDescription("Zatiaľ  iban takto pokial upravím gui na aktualnu podobu tabulky");
-                       
-                  Integer generatedKey =itemRepository.add( newItem);
-                      if(generatedKey!=null){
-                         System.out.println(generatedKey);
-                      }else{ System.err.println(generatedKey +" neexistuje");}
+                     System.out.println(newItem.getName()+" "+newItem.getAvailable());  
+                     impl.add(newItem);
+                  // Integer generatedKey =itemRepository.add( newItem);
+                  //     if(generatedKey!=null){
+                  //        System.out.println(generatedKey);
+                  //     }else{ System.err.println(generatedKey +" neexistuje");}
                         
                   } catch (Exception num) {
                         JOptionPane.showMessageDialog(null,num, "Upozornenie",JOptionPane.ERROR_MESSAGE);
