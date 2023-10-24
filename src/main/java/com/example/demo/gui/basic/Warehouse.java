@@ -17,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Warehouse  extends JFrame implements ActionListener{
@@ -88,8 +90,7 @@ public class Warehouse  extends JFrame implements ActionListener{
             left.add(pane,"gap left 25 ,wrap");
             left.add(button,"gap top 20,center");
 
-            Border border = new LineBorder(Color.black,2);           
-            field_6.setBorder(border);
+            Border border = new LineBorder(Color.black,1);         
             field_6.setAutoscrolls(true);
             field_1.setEditable(false);
 
@@ -113,7 +114,7 @@ public class Warehouse  extends JFrame implements ActionListener{
             right_2.add(field_4,"align left,wrap");
             right_2.add(label_5);
             right_2.add(field_5,"wrap,span 2");
-            right_2.add(label_6,"span 2");
+            right_2.add(label_6);
             right_2.add(field_6," wrap");
             right_2.add(create,"center, gap top 25");
             
@@ -156,6 +157,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                   field.setPreferredSize(new Dimension(120, 40));
                   field.setBackground(new Color(176, 196 ,222));
                   field.setForeground(Color.white);
+                  field.setBorder(border);
             }
             for(JButton button : buttonList){
                   button.addActionListener(this);
@@ -297,7 +299,7 @@ public class Warehouse  extends JFrame implements ActionListener{
 
       //  funkcia na vytvorenie noveho itemu 
       public void insertInToDatabaseNewItem(){
-            String query = "insert into item (name,available,description) value(?,?,?);";
+            String query = "insert into item (name,available,description,created_at) value(?,?,?,?);";
             String text = field_5.getText();
             int item_count = Integer.parseInt(text);
             try {
@@ -307,6 +309,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                   preparedStatement.setString(1,field_4.getText());  
                   preparedStatement.setInt(2,item_count);
                   preparedStatement.setString(3, field_6.getText());
+                  preparedStatement.setTimestamp(4, Timestamp.from(Instant.now()));
                   preparedStatement.executeUpdate();
 
                   statement.close();
