@@ -326,11 +326,11 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   newItem.setAvailable(available);
                   newItem.setDescription("Zatiaľ  iban takto pokial upravím gui na aktualnu podobu tabulky");
                      System.out.println(newItem.getName()+" "+newItem.getAvailable());  
-                  itemRepository.add(newItem);
-                  // Integer generatedKey =itemRepository.add( newItem);
-                  //     if(generatedKey!=null){
-                  //        System.out.println(generatedKey);
-                  //     }else{ System.err.println(generatedKey +" neexistuje");}
+                 // itemRepository.add(newItem);
+                  Integer generatedKey =itemRepository.add( newItem);
+                      if(generatedKey!=null){
+                         System.out.println(generatedKey);
+                      }else{ System.err.println(generatedKey +" neexistuje");}
                         
                   } catch (Exception num) {
                         JOptionPane.showMessageDialog(null,num, "Upozornenie",JOptionPane.ERROR_MESSAGE);
@@ -357,14 +357,14 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   JOptionPane.showMessageDialog(null,e, "Upozornenie",JOptionPane.ERROR_MESSAGE);
             }
       }
-      // public static void main(String[] args) {
-      //     /////////// 
-      //       try {
-      //             new WarehouseRest();
+      public static void main(String[] args) {
+          /////////// 
+            try {
+                  new WarehouseRest();
                   
-      //       } catch (Exception e) {
-      //             e.printStackTrace();
-      //       }
-      // }
+            } catch (Exception e) {
+                  e.printStackTrace();
+            }
+      }
       
 }

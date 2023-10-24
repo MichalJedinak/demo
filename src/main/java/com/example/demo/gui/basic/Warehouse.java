@@ -1,6 +1,8 @@
 package com.example.demo.gui.basic;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
@@ -38,6 +40,10 @@ public class Warehouse  extends JFrame implements ActionListener{
       JTextField field_2 = new JTextField(15);
       JLabel label_3 = new JLabel("Item_count ");
       JTextField field_3 = new JTextField(15);
+      JLabel label_6 = new JLabel("Desription ");
+      JTextField field_6 = new JTextField(15);
+       JLabel label_7 = new JLabel("Desription ");
+      JTextField field_7 = new JTextField(15);
       JButton update= new JButton("Edit item");
       JButton back = new JButton("Back");
       JButton delete = new JButton("Delete item");
@@ -81,8 +87,12 @@ public class Warehouse  extends JFrame implements ActionListener{
             left.add(label,"center,wrap");
             left.add(pane,"gap left 25 ,wrap");
             left.add(button,"gap top 20,center");
-            
+
+            Border border = new LineBorder(Color.black,2);           
+            field_6.setBorder(border);
+            field_6.setAutoscrolls(true);
             field_1.setEditable(false);
+
             right.setLayout(new MigLayout());
             right.add(label_1,"span 2");
             right.add(field_1,"gap left 25,span 2,wrap");
@@ -90,6 +100,8 @@ public class Warehouse  extends JFrame implements ActionListener{
             right.add(field_2,"gap left 25, wrap");
             right.add(label_3,"span 2");
             right.add(field_3,"gap left 25 ,wrap");
+            right.add(label_7,"span 2");
+            right.add(field_7,"gap left 25 , wrap");
             right.add(delete,"span 2,gap top 50");
             right.add(update,"gap left 100 ,gap top 50,wrap");
             right.add(back,"center, gap top 40");
@@ -101,6 +113,8 @@ public class Warehouse  extends JFrame implements ActionListener{
             right_2.add(field_4,"align left,wrap");
             right_2.add(label_5);
             right_2.add(field_5,"wrap,span 2");
+            right_2.add(label_6,"span 2");
+            right_2.add(field_6," wrap");
             right_2.add(create,"center, gap top 25");
             
             bar.add(menu);
@@ -120,9 +134,9 @@ public class Warehouse  extends JFrame implements ActionListener{
             this.repaint();
             ////  pridanie do array listov 
             labelList.add(label);labelList.add(info);labelList.add(label_1);
-            labelList.add(label_2);labelList.add(label_3);labelList.add(label_4);labelList.add(label_5);
-            filedList.add(field_1);filedList.add(field_2);filedList.add(field_3);filedList.add(field_4);
-            filedList.add(field_5);
+            labelList.add(label_2);labelList.add(label_3);labelList.add(label_4);labelList.add(label_5);labelList.add(label_6);
+            filedList.add(field_1);filedList.add(field_2);filedList.add(field_3);filedList.add(field_4);labelList.add(label_7);
+            filedList.add(field_5);filedList.add(field_6);filedList.add(field_7);
             buttonList.add(button);buttonList.add(update);buttonList.add(delete);buttonList.add(create);
             // jednotné nastavenie pre elementy v array listoch
             for(JLabel label :labelList){
@@ -193,7 +207,8 @@ public class Warehouse  extends JFrame implements ActionListener{
                         String item_name=    resulset.getString(2);
                         int l = resulset.getInt(3);
                         String item_count= String.valueOf(l);
-                   
+                        String description = resulset.getString("description");
+                        String timestamp = resulset.getString("created_at");
                         if(resulset.getString("name")==null){
                               item_name=" ";
                         }
@@ -201,7 +216,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                               item_count=" ";
                         }
                        
-                        String[] dataLists= {idString,item_name,item_count};// pole Stringov
+                        String[] dataLists= {idString,item_name,item_count,description,timestamp};// pole Stringov
                         defaultModel.addRow(dataLists);// pridanie row do default modelu
                         
                   }
@@ -231,7 +246,7 @@ public class Warehouse  extends JFrame implements ActionListener{
             int id = Integer.parseInt(selectedId);
             int item_count = Integer.parseInt(selectedCount);
             // System.out.println(id);
-            String query = "UPDATE item SET name = ? , available = ? WHERE id=?;";
+            String query = "UPDATE item SET name = ? , available = ?, description = ? WHERE id=?;";
             Connection connection = null;
             try {
                   connection = DriverManager.getConnection(url, user, password);
@@ -239,7 +254,8 @@ public class Warehouse  extends JFrame implements ActionListener{
                   PreparedStatement  preparedStatement = connection.prepareStatement(query);
                   preparedStatement.setString(1, field_2.getText());
                   preparedStatement.setInt(2, item_count);
-                  preparedStatement.setInt(3, id);
+                  preparedStatement.setString(3, field_7.getText());
+                  preparedStatement.setInt(4, id);
                   
                   preparedStatement.executeUpdate();
                   statement.close();
@@ -281,7 +297,7 @@ public class Warehouse  extends JFrame implements ActionListener{
 
       //  funkcia na vytvorenie noveho itemu 
       public void insertInToDatabaseNewItem(){
-            String query = "insert into item (name,available) value(?,?);";
+            String query = "insert into item (name,available,description) value(?,?,?);";
             String text = field_5.getText();
             int item_count = Integer.parseInt(text);
             try {
@@ -290,6 +306,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                   PreparedStatement preparedStatement = connection.prepareStatement(query);
                   preparedStatement.setString(1,field_4.getText());  
                   preparedStatement.setInt(2,item_count);
+                  preparedStatement.setString(3, field_6.getText());
                   preparedStatement.executeUpdate();
 
                   statement.close();
@@ -334,6 +351,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                                     field_1.setText(table.getModel().getValueAt(listItems,0).toString());
                                     field_2.setText(table.getModel().getValueAt(listItems,1).toString());
                                     field_3.setText(table.getModel().getValueAt(listItems,2).toString());
+                                    field_7.setText(table.getModel().getValueAt(listItems,3).toString());
                                     this.repaint();                                  
                               }
                               private void repaint() {
@@ -345,7 +363,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                   updateDataInToDatabase(); 
                   for(JTextField field :filedList){
                         field.setText("");                    
-                  }                
+                  }   field_6.setText("");             
                   showDataFromDatabaseTable();
                   this.repaint();this.validate();
             }
@@ -353,7 +371,7 @@ public class Warehouse  extends JFrame implements ActionListener{
                   deleteDataFromDatabase();                      
                   for(JTextField field :filedList){
                         field.setText("");
-                  }
+                  }field_6.setText(""); 
                   showDataFromDatabaseTable();
                   this.repaint();this.validate();
             }

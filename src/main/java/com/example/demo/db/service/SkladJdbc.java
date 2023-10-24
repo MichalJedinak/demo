@@ -15,7 +15,7 @@ public class SkladJdbc {
             try {
                   Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sklad", "root", "show_pussy8squirrel~hairy");
                   java.sql.Statement statement =connection.createStatement();
-                  ResultSet resulset = statement.executeQuery("SELECT * FROM warehouse");
+                  ResultSet resulset = statement.executeQuery("SELECT * FROM item");
                
                   while(resulset.next()){                     
                       int id= resulset.getInt(1);  
