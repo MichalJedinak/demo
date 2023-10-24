@@ -21,7 +21,7 @@ import com.example.demo.entity.Item;
 @RequestMapping("item")
 public class ItemController {
 
-      ItemService itemService;
+       private  ItemService itemService;
  
       public ItemController(ItemService itemService) {
             this.itemService = itemService;

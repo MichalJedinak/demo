@@ -4,9 +4,11 @@ package com.example.demo.gui.rest;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.db.repository.ItemRepository;
 import com.example.demo.db.service.api.request.UpdateItemRequest;
-import com.example.demo.db.service.impl.ItemServiceImpl;
 import com.example.demo.entity.Item;
 
 import net.miginfocom.swing.MigLayout;
@@ -22,11 +24,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@RestController
 public class WarehouseRest  extends JFrame implements ActionListener{
 
-      private ItemServiceImpl impl;
       private  ItemRepository itemRepository;
       private UpdateItemRequest request;
+
+      @Autowired
       public WarehouseRest(ItemRepository itemRepository,UpdateItemRequest request){
             this.itemRepository=itemRepository;
             this.request = request;
@@ -322,7 +326,7 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   newItem.setAvailable(available);
                   newItem.setDescription("Zatiaľ  iban takto pokial upravím gui na aktualnu podobu tabulky");
                      System.out.println(newItem.getName()+" "+newItem.getAvailable());  
-                     impl.add(newItem);
+                  itemRepository.add(newItem);
                   // Integer generatedKey =itemRepository.add( newItem);
                   //     if(generatedKey!=null){
                   //        System.out.println(generatedKey);
@@ -340,7 +344,10 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   String name = field_2.getText();
                   int available = Integer.parseInt(field_3.getText());
                   String description = descArea.getText();
-                  request = new UpdateItemRequest(name, available, description);  
+                  Item item = new Item();
+                  item.setId(id); item.setName(name);item.setAvailable(available);item.setDescription(description);
+                  System.out.println(item.getId()+" : "+item.getName()+" "+item.getAvailable());
+                  //request = new UpdateItemRequest(name, available, description);  
                   itemRepository.update( id,request);    
                   JOptionPane.showMessageDialog(null, "Pridali ste nový Item :)");
                   System.out.println("Vytvorenie Item prebehlo v poriadku.:)");
@@ -350,14 +357,14 @@ public class WarehouseRest  extends JFrame implements ActionListener{
                   JOptionPane.showMessageDialog(null,e, "Upozornenie",JOptionPane.ERROR_MESSAGE);
             }
       }
-      public static void main(String[] args) {
-          /////////// 
-            try {
-                  new WarehouseRest();
+      // public static void main(String[] args) {
+      //     /////////// 
+      //       try {
+      //             new WarehouseRest();
                   
-            } catch (Exception e) {
-                  e.printStackTrace();
-            }
-      }
+      //       } catch (Exception e) {
+      //             e.printStackTrace();
+      //       }
+      // }
       
 }
