@@ -43,7 +43,6 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
 		<dependency>
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>5.2.2.RELEASE</version>
@@ -54,9 +53,23 @@
 			<artifactId>spring-messaging</artifactId>
 			<version>5.2.2.RELEASE</version>
 		</dependency>
-		<groupId>com.miglayout</groupId>
-		<artifactId>miglayout</artifactId>
-		<version>3.7.4</version>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.10.2</version>
+		</dependency>
+
+			<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId> 
+			<version>2.10.2</version>
+			</dependency>
+
+
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout</artifactId>
+			<version>3.7.4</version>
 		</dependency>
 
 	</dependencies>
