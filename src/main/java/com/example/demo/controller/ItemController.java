@@ -27,17 +27,6 @@ public class ItemController {
             this.itemService = itemService;
       }
 
-      // @RequestMapping("/")
-      // public Sklad index(){
-      //       Sklad sklad = new Sklad("", 20);
-      //       return sklad;
-      // }
-      // @RequestMapping("/index")
-      // public String index(){
-      //       String s = "Moja prvá Srping Aplikácia";
-      //       return s;
-      // }
-
       @PostMapping
       public ResponseEntity add(@RequestBody Item item){
             Integer id = itemService.add(item);
@@ -47,6 +36,38 @@ public class ItemController {
                   return new ResponseEntity<>(null ,HttpStatus.INTERNAL_SERVER_ERROR);
             }
       }
+            @PostMapping(value = "/save")
+            public HttpStatus save(@RequestBody Item item){
+                  Integer id =     itemService.add(item);
+                 if(id != null){
+                  return  HttpStatus.CREATED;
+            }else{
+                  return HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+            }
+            @GetMapping(value = "/items")
+            public List<Item> getItems(){            
+                  return itemService.getAllItems();
+            }
+             @PatchMapping("/update/{id}")
+             public HttpStatus updateItem(@PathVariable("id") int id, @RequestBody UpdateItemRequest request){
+                  if(itemService.getItemm(id)!= null){
+                  itemService.update(id, request);
+                  return HttpStatus.OK;
+            }else{
+                  return HttpStatus.PRECONDITION_FAILED;
+
+            }
+            }
+            @DeleteMapping("/delete/{id}")
+            public HttpStatus deleteItem(@PathVariable("id") int id){
+                        if(itemService.getItemm(id)!=null){
+                              itemService.delete(id);
+                              return HttpStatus.OK;
+                  }else{
+                        return HttpStatus.PRECONDITION_FAILED;
+                  }
+            }
 
       @GetMapping
       public ResponseEntity allItems(){

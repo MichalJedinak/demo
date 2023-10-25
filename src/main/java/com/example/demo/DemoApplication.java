@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.example.demo.gui.rest.MyHttpConnection;
+import com.example.demo.gui.rest.WarehouseRest;
 import com.example.demo.httpclient.MyHttpClient;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.example.demo")
@@ -51,7 +52,8 @@ public class DemoApplication {
 			System.out.println("Chyba pri získavaní údajov zo servera.");
 		  }
 
-		 // SpringApplication.run(DemoApplication.class,args); 
+		 SpringApplication.run(DemoApplication.class,args); 
+		 
 	}
 
 }

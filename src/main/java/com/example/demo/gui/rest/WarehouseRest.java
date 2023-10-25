@@ -24,12 +24,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-@Component
+// @Component
 public class WarehouseRest  extends JFrame implements ActionListener{
        private UpdateItemRequest request;
       private  ItemRepository itemRepository;
 
-      @Autowired
+     // @Autowired
       public WarehouseRest(ItemRepository itemRepository){
             this.itemRepository=itemRepository;
              this.request = createUpdateItemRequest("defaultName", 0, "defaultDescription");
@@ -364,14 +364,6 @@ public class WarehouseRest  extends JFrame implements ActionListener{
        public UpdateItemRequest createUpdateItemRequest(String name,int available,String desription){
                   return new UpdateItemRequest(name, available, desription);
        };
-      public static void main(String[] args) {
-          /////////// 
-            try {
-                  new WarehouseRest();
-                  
-            } catch (Exception e) {
-                  e.printStackTrace();
-            }
-      }
+    
       
 }

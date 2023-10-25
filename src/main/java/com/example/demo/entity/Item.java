@@ -4,10 +4,14 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.lang.Nullable;
+
 import jakarta.annotation.Nonnull;
 
+@EntityScan
 public class Item {
+     
       @Nullable
       private Integer  id;
       @Nonnull
