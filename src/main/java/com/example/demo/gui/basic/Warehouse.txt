@@ -5,6 +5,8 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.Color;
@@ -397,13 +399,13 @@ public class Warehouse  extends JFrame implements ActionListener{
             }
 
       }
-      public static void main(String[] args) {
-            try {
-                  new Warehouse();
+      // public static void main(String[] args) {
+      //       try {
+      //             new Warehouse();
                   
-            } catch (Exception e) {
-                  e.printStackTrace();
-            }
-      }
+      //       } catch (Exception e) {
+      //             e.printStackTrace();
+      //       }
+      // }
       
 }

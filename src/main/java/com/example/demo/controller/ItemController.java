@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.db.service.api.ItemService;
@@ -84,7 +85,8 @@ public class ItemController {
             }
       }
 
-      @PatchMapping("{id}")
+     // @PatchMapping("{id}")
+       @RequestMapping(value = "/{id}", method = {RequestMethod.PATCH, RequestMethod.PUT})
       public ResponseEntity update(@PathVariable("id") int id, @RequestBody UpdateItemRequest request){
             if(itemService.getItemm(id)!= null){
                   itemService.update(id, request);

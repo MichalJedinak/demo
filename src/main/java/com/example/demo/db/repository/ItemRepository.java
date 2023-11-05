@@ -53,7 +53,6 @@ public class ItemRepository {
             final String query = "INSERT INTO item (name,available,description,created_at)VALUE(?,?,?,?);";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(new PreparedStatementCreator() {
-
                   @Override
                   public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                         PreparedStatement preparedStatement = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
