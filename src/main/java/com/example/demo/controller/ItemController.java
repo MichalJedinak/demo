@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.db.service.api.ItemService;
 import com.example.demo.db.service.api.request.UpdateItemRequest;
 import com.example.demo.entity.Item;
-
+@CrossOrigin
 @RestController 
 @RequestMapping("item")
 public class ItemController {
@@ -28,7 +29,7 @@ public class ItemController {
             this.itemService = itemService;
       }
 
-      @PostMapping
+      @PostMapping( consumes ="application/x-www-form-urlencoded")
       public ResponseEntity add(@RequestBody Item item){
             Integer id = itemService.add(item);
             if(id != null){
