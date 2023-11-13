@@ -30,7 +30,7 @@ public class ItemController {
       }
 
       @PostMapping( consumes ="application/x-www-form-urlencoded")
-      public ResponseEntity add(@RequestBody Item item){
+      public ResponseEntity<Object> add(@RequestBody Item item){
             Integer id = itemService.add(item);
             if(id != null){
                   return new ResponseEntity<>(id, HttpStatus.CREATED);
@@ -72,12 +72,12 @@ public class ItemController {
             }
 
       @GetMapping
-      public ResponseEntity allItems(){
+      public ResponseEntity<Object> allItems(){
             List<Item> itemList = itemService.getAllItems();
             return new ResponseEntity<>(itemList,HttpStatus.OK);
       }
       @GetMapping("{id}")
-      public ResponseEntity get(@PathVariable("id") int id){
+      public ResponseEntity<Object> get(@PathVariable("id") int id){
             Item item = itemService.getItemm(id);
             if(item ==null){
                   return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -88,7 +88,7 @@ public class ItemController {
 
      // @PatchMapping("{id}")
        @RequestMapping(value = "/{id}", method = {RequestMethod.PATCH, RequestMethod.PUT})
-      public ResponseEntity update(@PathVariable("id") int id, @RequestBody UpdateItemRequest request){
+      public ResponseEntity<Object> update(@PathVariable("id") int id, @RequestBody UpdateItemRequest request){
             if(itemService.getItemm(id)!= null){
                   itemService.update(id, request);
                   return ResponseEntity.ok().build();
@@ -99,7 +99,7 @@ public class ItemController {
       }
 
       @DeleteMapping("{id}")
-      public ResponseEntity deleteProduct(@PathVariable("id") int id){
+      public ResponseEntity<Object> deleteProduct(@PathVariable("id") int id){
             if(itemService.getItemm(id)!=null){
                   itemService.delete(id);
                   return ResponseEntity.ok().build();
