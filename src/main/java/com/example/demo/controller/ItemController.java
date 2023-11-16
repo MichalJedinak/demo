@@ -29,7 +29,7 @@ public class ItemController {
             this.itemService = itemService;
       }
 
-      @PostMapping( consumes ="application/x-www-form-urlencoded")
+      @PostMapping
       public ResponseEntity<Object> add(@RequestBody Item item){
             Integer id = itemService.add(item);
             if(id != null){
